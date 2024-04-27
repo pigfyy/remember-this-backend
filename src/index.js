@@ -26,10 +26,13 @@ app.get("/", (req, res) => {
 app.post("/upload-to-pinecone", async (req, res) => {
   const id = req.body?.id;
   const imageUrl = req.body?.imageUrl;
+  console.log(`id: ${id} \nimageUrl: ${imageUrl}`);
 
   const embedding = await getEmbedding({ imageUrl: imageUrl });
+  console.log(`embedding: ${embedding}`);
 
   await insertRecord(id, embedding, imageUrl);
+  console.log("record inserted");
 
   res.sendStatus(200);
 });
